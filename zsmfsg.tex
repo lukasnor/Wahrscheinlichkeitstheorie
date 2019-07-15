@@ -205,14 +205,14 @@ $\int_{A'} \P(A|Z=z)\P^Z(\d z) =\P(A\cap\{Z\in A'\})$\parh
 Iterierter Erwartungswert: $\E{X}=\int_{\Omega'}\cE{X}{Z=z}\P^Z(\d z)$\parh
 Iterierte Wahrscheinlichkeit: $\P(A)=\int_{\Omega'}\P(A|Z=z)\P^Z(\d z)$\parh
 $(A_n)_{n\in\N}$ paarweise disjunkt:\\
-$\implies \P\left(\sum_{j=1}^\infty\big|Z=z\right)=\sum_{j=1}^\infty \P(A_j|Z=z) \: \P$-f.s.
+$\implies \P\left(\sum_{j=1}^\infty A_j\big|Z=z\right)=\sum_{j=1}^\infty \P(A_j|Z=z) \: \P$-f.s.
 
 \paragraph{Filtration, Stoppzeiten, Adaptiertheit}\hspace{0pt}\parh
 Definitionen:\\
 Filtration: $\mathds{F}:=(\F_n)_{n\in\N}$ Sub-$\sigma$-Algebren von $\A$, $\F_n\subseteq\F_{n+1},\:n\in\N$\\
 Stoppzeit: $\tau:\Omega \to \N_0 \cup \{\infty\}$ bzgl. $\mathds{F}$, $\{\tau=n\}\in\F_n \Leftrightarrow\{\tau\leq n\}\in\F_n\:\forall n\in\N_0$, $\P(\tau<\infty)=1 \Rightarrow \tau$ endlich.\\
 Adaptiertheit: $(X_n)_{n\in\N_0},\:X_n:\Omega\to\Omega' \F_n$-messbar. $\F_n^X:=\sigma(X_0,\dots,X_n)$ natürliche Filtration\parh
-$\tau_1, \tau_2$ Stoppzeiten $\Longrightarrow \tau_1+\tau_2,\,\max(\tau_1,\tau_2),\min(\tau_1,\tau_2)$ Stoppzeiten. $\tau := \int\{n\geq0:X_n\in A'\}$ für $A'\in\A'$\parh
+$\tau_1, \tau_2$ Stoppzeiten $\Longrightarrow \tau_1+\tau_2,\,\max(\tau_1,\tau_2),\min(\tau_1,\tau_2)$ Stoppzeiten. $\tau := \inf \{n\geq0:X_n\in A'\}$ für $A'\in\A'$\parh
 $\sigma$-Algebra der $\tau$-Vergangenheit:\\
 $\A_\tau:=\{A\in\A:A\cap\{\tau\leq n\}\in\F_n\,\forall n\in\N\}$\\
 $X_\tau :\Omega\to\R,\:X_\tau(\omega):=\one_{\{\tau<\infty\}}(\omega)X_{\tau(\omega)}(\omega)$ ist $\A_\tau$-messbar.
