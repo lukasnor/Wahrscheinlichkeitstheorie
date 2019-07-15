@@ -1,0 +1,253 @@
+\documentclass[a4paper,draft]{article}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{bbold}
+\usepackage{mathrsfs}
+\usepackage{dsfont}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{eurosym}
+\DeclareUnicodeCharacter{20AC}{\euro}
+\usepackage[ngerman]{babel}
+\usepackage{csquotes}
+\usepackage[margin=1cm]{geometry}
+\usepackage{multicol}
+\usepackage{xcolor}
+\usepackage{centernot}
+%\usepackage{Blindtext}
+%\usepackage[acronym]{glossaries}
+%\usepackage{titling}
+
+%New Math Commands
+\newcommand{\R}{\mathds{R}}
+\newcommand{\N}{\mathds{N}}
+\newcommand{\one}{\mathds{1}}
+\newcommand{\A}{\mathcal{A}}
+\newcommand{\B}{\mathcal{B}}
+\renewcommand{\P}{\mathds{P}}
+\newcommand{\E}[1]{\mathds{E}[#1]}
+\newcommand{\G}{\mathcal{G}}
+\newcommand{\D}{\mathcal{D}}
+\newcommand{\F}{\mathcal{F}}
+\newcommand{\Q}{\mathcal{Q}}
+\newcommand{\cE}[2]{\E{#1 | #2}}
+\renewcommand{\d}{\mathrm{d}}
+\newcommand{\V}{\mathds{V}}
+\newcommand{\parh}{\par\hangindent=0.5cm}
+\renewcommand{\wr}{(\Omega,\A,\P)}
+\newcommand{\konv}[1]{\overset{#1}{\longrightarrow}}
+\newcommand{\fskonv}{\konv{\mathrm{f.s.}}}
+\newcommand{\pkonv}{\konv{\P}}
+\newcommand{\dkonv}{\konv{\D}}
+\newcommand{\Z}{\mathds{Z}}
+
+\begin{document}
+
+\title{Wahrscheinlichkeitstheorie - Zusammenfassung}
+\date{}
+\author{}
+\setlength{\parindent}{0cm}
+\setlength{\parskip}{-0pt}
+\pagenumbering{gobble}
+
+%\maketitle
+\begin{center}
+\large \bf{Wahrscheinlichkeitstheorie - Formelsammlung}
+\end{center}
+Es seinen $\wr$ ein WR, $X,Y \in \mathcal{L}^1\wr$ Zufallsvariablen, $(X_n)_{n\in \N}$ Folge von Zufallsvariablen
+\begin{multicols}{2}
+
+\paragraph{Nett zu Wissen}\hspace{0pt}\parh
+Markov-Ugl.: $f:\Omega \to \overline{\R}_{\geq 0}, t\geq 0$\\
+$\P(f \geq t)\leq \frac{1}{t}\int_\Omega f \d\P$\\
+$\P(|X|\geq\varepsilon)\leq\frac{\E{g(|X|)}}{g(\varepsilon}$, falls $g$\,:\,$\R_{\geq0}\to\R$ monoton wachsend, $g(0)\geq 0,g(t)>0\,\forall t>0 $\parh
+Hölder: $\E{|XY|} \leq (\E{|X|^p})^{1/p}(\E{|Y|^q})^{1/q}$\parh
+Minkowski: $(\E{|X+Y|^p})^{1/p} \leq (\E{|X|^p})^{1/p}+(\E{|Y|^p}^{1/p},\,1\leq p < \infty$\parh
+Chauchy-Schwarz: $|\mathrm{Cov}(X,Y)| \leq \sqrt{\V(X)\V(Y)}$\parh
+Jensen: $M\subset\R$ Intervall, $g:M\to \R$ konvex, $\P(X\in M)=1$, $g(X)$ ib. $\Rightarrow\E{g(X)} \geq g(\E{X})$\parh
+Tschebyschow: $\P(|X-\E{X}|\geq \varepsilon) \leq \frac{\V(X)}{\varepsilon^2}$, $\varepsilon > 0$\parh
+Borel-Cantelli: $\sum_{n=1}^\infty \P(A_n) < \infty \Rightarrow \P( \limsup_{n\to\infty} A_n) =0$\\
+$(A_n)$ {\color{red}unabh.} $\Rightarrow \sum_{n=1}^\infty \P(A_n) = \infty \Rightarrow \P( \displaystyle\limsup_{n\to\infty} A_n) =1$
+
+\paragraph{Erwartungswerte und Varianzen}\hspace{0pt}\parh
+$\E{X} := \int_\Omega X\d\P=\int_0^\infty (1-F(t))\d t - \int_{-\infty}^0 F(t)\d t$\parh
+$X,Y$ unabh. $\Longrightarrow \E{XY}=\E{X}\E{Y}$\parh
+$X \geq 0 \implies \E{X}=\int_0^\infty \P(X \geq t)\d t$\parh
+$\V(X):=\E{X-\E{X}}=\E{X^2}-\E{X}^2=\E{X(X-1)}+\E{X}-\E{X}^2$\parh
+$\V(aX+b)=a^2\V(X),\,\V(X)=0\Leftrightarrow \P(X=a)=1$ für $a\in\R$\parh
+$X,Y$ unabh. (also unkorreliert) $\Longrightarrow \V(X+Y)=\V(X)+\V(Y)$\parh
+$\mathrm{Cov}(X,Y):=\E{(X-\E{X})(Y-\E{Y})}=\E{XY}-\E{X}\E{Y}$\parh
+
+\paragraph{Faltungen}\hspace{0pt}\parh
+$X_1,\dots,X_n$ unabhängig{\color{red}(!)} auf $\wr$. Faltungsprodukt:\\
+$\P^{X_1}\ast\dots\ast\P^{X_n} := \P^{X_1+\dots+X_n}$\parh
+Dichten $f$ und $g$ von $X$ und $Y$: Dichte von $X+Y$ ist $f\ast g(s):=\int_{-\infty}^\infty g(s-x)f(x)\d x$
+
+\paragraph{Verteilungen}\hspace{0pt}\parh
+$X \sim \mathrm{Bin}(n,p)$: $\P(X=k)=\binom{n}{k}p^k(1-p)^{n-k}$\\
+$Y\sim \mathrm{Bin}(m,p),\, X,Y$ unabh.: $X \ast Y \sim \mathrm{Bin}(n+m,p)$\\
+$\E{X}=np$, $\V(X)=np(1-p)$\parh
+$X \sim \mathrm{Po}(\lambda)$: $\P(X=k)=\frac{\lambda^k}{k!}e^{-\lambda}$\\
+$Y\sim\mathrm{Po}(\mu),\, X,Y$ unabh.: $X \ast Y \sim \mathrm{Po}(\lambda+\mu)$\\
+$\E{X}=\V(X)=\lambda$, $\varphi_X(t)=\mathrm{exp}\big(\lambda(e^{it}-1)\big),\:t\in\R$\parh
+$X\sim\mathrm{Hyp}(n,r,s)$: $\P(X=k)=\frac{\binom{r}{k}\binom{s}{n-k}}{\binom{r+s}{n}}$, $\E{X}=n\frac{r}{r+s}$, $\V(X)=n\frac{r}{r+s}(1-\frac{r}{r+s})(1-\frac{n-1}{r+s-1})$\parh
+$X \sim \mathrm{N}(\mu,\sigma^2): f(x)=\frac{1}{\sigma\sqrt{2\pi}}\mathrm{exp}\left(-\frac{(x-\mu)^2}{2\sigma^2}\right)$, $F(x)=\Phi\left(\frac{x-\mu}{\sigma}\right)$\\
+$Y\sim\mathrm{N}(\nu,\tau^2),\, X,Y$ unabh.: $X \ast Y\sim \mathrm{N}(\mu+\nu,\sigma^2+\tau^2)$\\
+$\E{X}=\mu$, $\V(X)=\sigma^2$\\
+$\varphi_X(t)=e^{it\mu}\mathrm{exp}\left(-\frac{\sigma^2t^2}{2}\right),\:t\in\R$\parh
+$X \sim \mathrm{Exp}(\lambda)$, $\lambda > 0$: $f(x)=\one_{[0,\infty)}(x)\lambda e^{-\lambda x}$, $F(x)=1-e^{-\lambda x}$, $x>0$, $X_1,\dots,X_n$ u.i.v. $\Rightarrow \sum_{i=1}^n X_i \sim  \Gamma(n,\lambda)$\\
+$\E{X}=\frac{1}{\lambda}$, $\V(X)=\frac{1}{\lambda^2}$\parh
+$X\sim\mathrm{Geo}(p)$: $\P(X=k)=(1-p)^kp$, $\E{X}=\frac{1-p}{p}$, $\V(X)=\frac{1-p}{p^2}$, $\P(X=m+k|X\geq k)=\P(X=m)$\parh
+$X\sim\mathrm{Nb}(r,p)$: $\P(X=k)=\binom{k+r-1}{k}p^r(1-p)^k$, $\E{X}=r\frac{1-p}{p}$, $\V(X)=r\frac{1-p}{p^2}$\parh
+$X\sim\mathrm{Mult}(n,p_1,\dots,p_s)$: $\P(X_1=k_1,\dots,X_s=k_s)=\binom{n}{k_1,\dots,k_s}p_1^{k_1}\hdots p_s^{k_s}$\parh
+$X\sim\mathrm{MultHyp}(n,r_1,\dots,r_s)$: $\P(X_1=k_1,\dots,X_s=k_s)=\frac{\binom{r_1}{k_1}\hdots\binom{r_s}{k_s}}{\binom{\sum_j r_j}{n}},\,n=\sum_j k_j$\parh
+$X\sim\Gamma(\alpha,\beta)$: $f(x)=\frac{\beta^\alpha}{\Gamma(\alpha)}t^{\alpha-1}e^{-\beta t},\,t>0$, $\E{X}=\frac{\alpha}{\beta}$, $\V(X)=\frac{\alpha}{\beta^2}$, $c>0, cX \sim \Gamma(\alpha,\frac{\beta}{c})$, $\Gamma(x)=\int_0^\infty t^{x-1}e^{-t}\d t$\parh
+$X\sim\mathrm{U}(a,b)$: $f(x)=\frac{1}{b-a}\one_{[a,b]}(x)$, $F(x)=\frac{x-a}{b-a}\one_{[a,b]}(x)$
+
+\paragraph{Charakteristische Funktionen}\hspace{0pt}\parh
+$\varphi_X(t) := \E{e^{itX}} = \int_\R e^{itX}\P^X(\d x)$\parh
+Eigenschaften: $\varphi_X(0)=1,|\varphi(t)|\leq 1,\:t\in\R$\\
+$\varphi_X(-t)=\overline{\varphi_X(t)},\: t\in\R$\\
+$\varphi_{aX+b}=e^{itb}\varphi_X(at),\:a,b,t\in\R$\parh
+Multiplikationsformel: $X_1,\dots,X_n$ seien unabhängig $\Longrightarrow \varphi_{X_1+\dots+X_n}(t)=\prod_{j=1}^n\varphi_{X_j}(t)$\parh
+Momente: $\E{|X|^k}<\infty$ für $k\in\N \Rightarrow \varphi_X\in\mathcal{C}^k,\,r=1,\dots,k$:\\
+$\varphi_X^{(r)}(t)=\frac{\d^r\varphi_X(t)}{\d t^r}=\int_{-\infty}^\infty (ix)^re^{itx}\P^X(\d x),\: t\in\R\\
+\varphi_X^{(r)}(0)=i^r\E{X^r}$\parh
+Eindeutigkeit: $\P^X=\P^Y \Longleftrightarrow \varphi_X=\varphi_Y$\parh
+Umkehrformel: $\int_{-\infty}^\infty|\varphi_X(t)|\d t < \infty \Rightarrow X$ besitzt stetig beschränkte $\lambda^1$-Dichte\\
+$f(x) = \frac{1}{2\pi}\int_{-\infty}^{\infty}e^{-itx}\varphi_X(t)\d t,\: x\in\R$\parh
+$X\sim-X \Longleftrightarrow \varphi_X(t)\in\R \:\forall t\in\R$
+
+\paragraph{Konvergenztypen}\hspace{0pt}\parh
+Verteilungskonvergenz:\\
+$X_n \dkonv X :\Leftrightarrow \lim_{n\to \infty} F_n(x) = F(x) \: \forall x\in \mathcal{C}(F)$\\
+$F$ stetig: $X_n \dkonv X \Leftrightarrow \sup_{x\in\R}|F_n(x)-F(X)|\to 0$\\
+{\color{red}Achtung}: $X_n\dkonv X$ und $Y_n\dkonv Y \centernot\Longrightarrow X_n +Y_n \dkonv X+Y$\\
+Sluzki: $X_n \dkonv X$, $Y_n \konv{{\color{red}\P}} a\in\R$:
+$X_n+Y_n\dkonv X+a$, $X_nY_n\dkonv aX$\parh
+Stochastische Konvergenz:\\
+$X_n \pkonv X :\Leftrightarrow \lim_{n\to \infty} \P(|X_n - X| > \varepsilon) = 0 \: \forall \varepsilon>0$\\
+$\forall\:(X_{n_k})$ Teilfolge von $(X_n)$ besitzt weitere TF $(X_{n_k'})$ mit $X_{n_k'}\fskonv X$\\
+Sei $h$ stetig: $h(X_n)\pkonv h(X)$\\
+$(a_n)_{n\in\N}\in\R$ mit $a_n\rightarrow a$: $a_nX_n\pkonv aX$\\
+$aX_n+bY_n\pkonv aX+bY$, $X_nY_n\pkonv XY$, $|X_n|\pkonv|X|$\parh
+$\P$-fast sichere Konvergenz:\\
+$X_n \fskonv X :\Leftrightarrow \P(\lim_{n\to\infty} X_n=X)=1\\$
+$\Leftrightarrow \lim_{n\to\infty} \P(\{\sup_{k\geq n}|X_n -X|>\varepsilon\})=0\:\forall \varepsilon>0$
+$\Leftrightarrow \sum_{n=1}^\infty\P(|X_n-X|>\varepsilon)<\infty \: \forall \varepsilon>0$\\
+$\Longleftrightarrow X_n\pkonv X$ und $X_n$ monoton\parh
+
+%\paragraph{Konvergenz im $p$-ten Mittel}TODO
+
+\paragraph{Straffheit, relative Kompaktheit}\hspace{0pt}\parh
+$\emptyset\not=\Q$ Menge von WMaßen auf $\B$:\parh
+Straffheit:\\
+$:\Longleftrightarrow \forall \varepsilon>0\,\exists K=K_\varepsilon\subseteq \R$ kompakt: $Q(K)\geq 1-\varepsilon\:\forall Q\in\Q$\\
+$|\Q|<\infty \Longrightarrow \Q$ straff\\
+$\sup_{n\in\N}\E{|X_n|}<\infty \Longrightarrow \{\P^{X_n}:n\in\N\}$ straff\\
+$\{\P^{X+a_n}:n\in\N\}$ straff $\Longleftrightarrow (a_n)_{n\in\N}$ beschränkt\parh
+Relative Kompaktheit:\\
+$:\Longleftrightarrow \forall\:(Q_n)\in\Q\:\exists\:(Q_{n_k})$ und W-Maß $Q\:${\color{red} (u.U. $\not\in\Q$)}: $Q_{n_k}\dkonv\Q$\\
+$X_n\dkonv X \Longrightarrow \{\P^{X_n}:n\in\N\}$ relativ kompakt\parh
+Äquivalenz: $\Q$ straff $\Longleftrightarrow \Q$ relativ kompakt\parh
+$\{\P^{X_n}:n\in\N\}$ straff und $\exists$ W-Maß $Q:\forall$ verteilungskonvergente Teilfolge $(X_{n_k})$ mit $X_{n_k}\dkonv Q \Longrightarrow X_n\dkonv Q$\parh
+Lévy-Cramér: $F_n\dkonv F \Longleftrightarrow \forall\,t\in\R\exists\,\varphi(t):=\lim_{n\to\infty}\varphi_n(t)$, $\varphi$ stetig im Nullpunkt.
+
+\paragraph{Gesetze großer Zahlen}\hspace{0pt}\parh
+$(X_n)$ u.i.v., $S_n:=X_1+\dots+X_n$, $\overline{X_n}:=\frac{S_n}{n}$:\parh
+Schwaches: $\E{X_1^2}<\infty\Longrightarrow \overline{X_n}\pkonv \E{X_1}$\parh
+Kolmogorov: $\E{|X|}<\infty \Longleftrightarrow \overline{X_n}\fskonv \E{X_1}$\parh
+''-Krit.: $(X_n)$ unabh., $\E{X_n^2}<\infty$, $(a_n)\in (0,\infty)$, $a_n \uparrow \infty$:\\
+$\sum_{n=1}^\infty\frac{\V(X_n)}{a_n^2}<\infty \Rightarrow \frac{1}{a_n}\sum_{j=1}^n(X_j-\E{X_j}) \fskonv 0$\parh
+Beschr. Varianz: $(X_n)$ unabh., $\sup_{n\in\N}\V(X_n)\leq c< \infty\Longrightarrow\lim_{n\to\infty}\frac{1}{n}\sum_{j=1}^n(X_j-\E{X_j}) = 0\: \P$-f.s.
+
+\paragraph{Konvergenzsätze/Zentrale Grenzwertsätze}\hspace{0pt}\parh
+Moivre-Laplace: $S_n\sim\mathrm{Bin}(n,p),0<p<1\Longrightarrow$\\
+$\frac{S_n-np}{\sqrt{np(1-p)}}\dkonv\mathrm{N}(0,1),\:n\longrightarrow\infty$\parh
+$\P(X=a)=1$ und $X_n\dkonv X \Longrightarrow X_n\pkonv X$\parh
+Lindeberg-Levy: $(X_n)$ u.i.v. mit $\E{X^2}<\infty$ und $a:=\E{X}$, $\sigma^2:=\V(X_1)$:\\
+$\frac{\sum_{j=1}^nX_j -na}{\sigma\sqrt{n}} \dkonv \mathrm{N}(0,1)$ für $n \longrightarrow \infty$\parh
+Definitionen: $(X_{nj})$, $n\in \N$, $j=1,\hdots,k_n,$ seien für festes $n$ unabh.; $a_{nj}:=\E{X_{nj}}$, $0<\sigma_{nj}^2:=\V(X_{nj})$, $S_n:=\sum_j X_{nj}$, $\sigma_n^2:=\V(S_n)=\sum_j \sigma_{nj}^2$\parh
+Lindeberg-Bedingung:\\
+$L_n(\varepsilon):=\frac{1}{\sigma_n^2}\sum_{j=1}^{k_n} \E{(X_{nj}-a_{nj})^2 \one\{|X_{nj}-a_{nj}|>\sigma_n\varepsilon\}}\\
+\longrightarrow 0 \quad \forall \varepsilon >0$ $\Longrightarrow \frac{S_n-\E{S_n}}{\sqrt{\V(S_n)}}\dkonv \mathrm{N}(0,1)$\parh
+$\Longrightarrow$ Feller-Bedingung: $\displaystyle\lim_{n\to\infty}\frac{\mathrm{max}_{j=1,\dots,k_n}\sigma_{nj}^2}{\sigma_n^2}=0$\parh
+Ljapunov-Bed.: $\exists \delta>0:\: \frac{1}{\sigma_n^{2+\delta}}\sum_{j=1}^{k_n}\E{|X_{nj}-a_{nj}|^{2+\delta}}\konv{n\to\infty}0$\\
+$\Longrightarrow$ Lindebergbedinung
+
+\paragraph{Bedingte Erwartungen}\hspace{0pt}\parh
+Definition: Sei $\mathcal{G} \subseteq \A$ eine Sub-$\sigma$-Algebra von $\A$, $\E{X}{\G}$ messbar, integrierbar und $\int_A \cE{X}{\G}\d \P = \int_A X \d \P \quad \forall A \in \G$\parh
+Existenz und Eindeutigkeit: Ja, und $\P$-f.s.\parh
+Eigenschaften: $\E{\cE{X}{\G}}=\E{X}$\\
+$X \G$-messbar $\implies \cE{X}{\G}=\E{X}$\\
+$\cE{aX+bY}{\G}=a\cE{X}{\G}+b\cE{Y}{\G},\:a,b\in\R$\\
+$X\leq Y \P$-f.s. $\implies \cE{X}{\G}\leq\cE{Y}{\G} \P$-f.s.\\
+$\E{|XY|}<\infty,\:Y \G$-messbar $\implies \cE{XY}{\G}=Y\cE{X}{\G}$\\
+$\F\subseteq\G$ Sub-$\sigma$-Algebra $\implies \cE{X}{\F}=\cE{\cE{X}{\G}}{\F}$\\
+$|\cE{X}{\G}|\leq\cE{|X|}{\G}$\\
+$X$ und $\G$ unabhängig $\implies \cE{X}{\G}=\E{X}$\\
+Monotone und Dominierte Konvergenz bleiben erhalten.\\
+Jensen-Ungleichung gilt auch.\\
+$\mathcal{H}\subseteq\A$ weitere Sub-$\sigma$-Algebra unabhängig von $\sigma(\sigma(X)\cup\G) \implies \cE{X}{\G}=\cE{X}{\sigma(\G\cup\mathcal{H})}$\parh
+Totaler Erwartungswert: $A_1, A_2,\dots\subset\Omega$ paarweise disjunkte Zerlegung, $\P(A_j)>0\,\forall j\in\N$, $\sum_{j\geq 1}\P(A_j)=1$:\\
+$\E{X}=\sum_{j\geq 1}\cE{X}{A_j}\P(A_j)$\\
+I.d.F. ist $\cE{X}{\sigma((A_j)_{j\in\N})}=\sum_{j\in\N}\frac{1}{\P(A_j)}\int_{A_j}X\d\P\cdot\one\{A_j\}$
+
+\paragraph{Charakteristische Gleichungen}\hspace{0pt}\parh
+$(\Omega',\A')$ sei ein Messraum, $Z:\Omega\to\Omega'$ sei ZV. Dann existiert eine messbare, $\P^Z$-f.s. eindeutige, Funktion $h:\Omega'\to\overline{\R}$ Faktorisierung:\\
+$\cE{X}{Z}=h\circ Z$\\
+$\cE{X}{Z=z}:=h(z)=\int_\R x\P_{Z=z}^X \P^Z(\d x)=\int_\R xf(x|z)\d x$ mit $f(x|z)=\frac{f(x,z)}{\int_\R f(x,z)\d x}$\\
+$\P(A|Z):=\cE{\one_A}{Z}$\parh
+Charakteristische Gleichungen: $\forall A'\in\A'$:\\
+$\int_{A'}h\d \P^Z=\int_{Z^{-1}(A')}h\circ Z \d\P=\int_{Z^{-1}(A')}\cE{X}{Z}\d\P=\int_{Z^{-1}(A')}X\d\P$\\
+$\int_{A'}\cE{X}{Z=z}\P^Z(\d z)=\int_{Z^{-1}(A')}X\d\P$\\
+$\int_{A'} \P(A|Z=z)\P^Z(\d z) =\P(A\cap\{Z\in A'\})$\parh
+Iterierter Erwartungswert: $\E{X}=\int_{\Omega'}\cE{X}{Z=z}\P^Z(\d z)$\parh
+Iterierte Wahrscheinlichkeit: $\P(A)=\int_{\Omega'}\P(A|Z=z)\P^Z(\d z)$\parh
+$(A_n)_{n\in\N}$ paarweise disjunkt:\\
+$\implies \P\left(\sum_{j=1}^\infty\big|Z=z\right)=\sum_{j=1}^\infty \P(A_j|Z=z) \: \P$-f.s.
+
+\paragraph{Filtration, Stoppzeiten, Adaptiertheit}\hspace{0pt}\parh
+Definitionen:\\
+Filtration: $\mathds{F}:=(\F_n)_{n\in\N}$ Sub-$\sigma$-Algebren von $\A$, $\F_n\subseteq\F_{n+1},\:n\in\N$\\
+Stoppzeit: $\tau:\Omega \to \N_0 \cup \{\infty\}$ bzgl. $\mathds{F}$, $\{\tau=n\}\in\F_n \Leftrightarrow\{\tau\leq n\}\in\F_n\:\forall n\in\N_0$, $\P(\tau<\infty)=1 \Rightarrow \tau$ endlich.\\
+Adaptiertheit: $(X_n)_{n\in\N_0},\:X_n:\Omega\to\Omega' \F_n$-messbar. $\F_n^X:=\sigma(X_0,\dots,X_n)$ natürliche Filtration\parh
+$\tau_1, \tau_2$ Stoppzeiten $\Longrightarrow \tau_1+\tau_2,\,\max(\tau_1,\tau_2),\min(\tau_1,\tau_2)$ Stoppzeiten. $\tau := \int\{n\geq0:X_n\in A'\}$ für $A'\in\A'$\parh
+$\sigma$-Algebra der $\tau$-Vergangenheit:\\
+$\A_\tau:=\{A\in\A:A\cap\{\tau\leq n\}\in\F_n\,\forall n\in\N\}$\\
+$X_\tau :\Omega\to\R,\:X_\tau(\omega):=\one_{\{\tau<\infty\}}(\omega)X_{\tau(\omega)}(\omega)$ ist $\A_\tau$-messbar.
+
+\paragraph{Martingale}\hspace{0pt}\parh
+Definition: $\wr$ sei ein WR, $(\F_n)_{n\in\N}$ eine Filtration, $(X_n)_{n\in\N_0} \in\mathcal{L}^1\wr$ adaptiert:\\
+Martingal : $\cE{X_{n+1}}{\F_n}=X_n\:\forall n\in\N_0$\\
+$\Longleftrightarrow \E{X_n} = \E{X_0} \:\forall n\in\N_0$\\
+Submartingal: $\cE{X_{n+1}}{\F_n}\geq X_n\:\forall n\in\N_0$\\
+$\Longrightarrow \cE{X_m}{F_n}\geq X_n\:\forall m>n\geq0$\\
+$\Longrightarrow \E{X_m}\geq\E{X_0} \:\forall m\in\N_0$\parh
+Summen und Produkte: $(X_n)_{n\in\N_0}$ unabh. mit $\E{|X_n|}<\infty$, $Y_n:=\sum_{j=0}^nX_j$, $Z_n:=\prod_{j=0}^n X_j$, $n\geq 0$:\\
+$(Y_n)_{n\in\N_0}$ (Sub-)Martingal $\Longleftrightarrow \E{X_n}(\geq)=0 \:\forall n\in\N$\\
+$(Z_n)_{n\in\N_0}$ (Sub-)Martingal $\Longleftrightarrow \E{X_n}(\geq)=1 \:\forall n\in\N$\parh
+Doobsches Martingal: WR $\wr$, ZV $X\in\R$ mit $\E{|X|}<\infty$, Filtration $\mathds{F}$:\quad $X_n:=\cE{X}{F_n}$\parh
+Prävisible/Vorhersagbare Folge: $V_n$ ist $\F_{n-1}$-messbar $\forall n\geq 0$\\
+$(X_n)$ vorhersagbar $\Longrightarrow X_n=X_0\:\P$-f.s.\parh
+Doob-Zerlegung: $(X_n)_{n\in\N_0}$ adaptiert an $\mathds{F}$. Eind. Zerlegung:\\
+$X_n=M_n+V_n$ mit $(M_n)$ Martingal, $(V_n)$ vorhersagbar mit $V_0=0$\\
+$(X_n)$ Submartingal $\Longleftrightarrow (V_n)\: \P$-f.s. monoton wachsend\parh
+Orthogonale Zuwächse: $\E{X_n^2}<\infty \:\forall n\geq0$ ($\mathcal{L}^2$-Martingal):
+$\E{(X_m-X_{m-1})(X_l-X_{l-1}}=0 \:\forall l\not =m$\\
+$\V(X_n)=\V(X_0)+\sum_{j=1}^n\E{(X_j-X_{j-1})^2}$\parh
+Martingale und konvexe Funktionen liefern Submartingale\parh
+Spielsystem: $(C_n)_{n\in\N}$ prävisibel bzgl. $\mathds{F}$ mit $C_k$ als \enquote{Einsatz beim $k$-ten Spiel}\\
+Gewinn: $Y_n:=\sum_{k=1}^n C_k(X_k-X_{k-1}) \Longleftrightarrow Y = C\bullet X$ Martingaltransformation!\parh
+Martingaltransformation: $X=(X_n)_{n\geq 0}$ (Sub-)Martingal bzgl. $\mathds{F}$ und $C=(C_n)_{n\geq 1}$ prävisibel bzgl. $\mathds{F}$:\\
+$C_n(X_n-X_{n-1})\in\mathcal{L}^1\wr \Longrightarrow C\bullet X$ ist wieder ein (Sub-)Martingal\\
+$(C_n)_{n\geq 1}$ gleichmäßig beschränkt ist hinreichend.\parh
+Gestoppte Martingale: $(X_n)_{n\geq 0}$ Martingal $\Longrightarrow (X_{\tau \wedge n})_{n\geq 0}$ definiert durch $X_{\tau \wedge n}(\omega):=X_{\tau(\omega)\wedge n}(\omega)$ Martingal\parh
+Optionales Stoppen: $(X_n)_{n\geq 0}$ (Sub-)Martingal, $\tau$ Stoppzeit bzgl. natürlicher Filtration, $\E{\tau}<\infty$: $\exists c\in(0,\infty)$:\\
+$\cE{\one\{\tau\geq n\}\cdot|X_n-X_{n-1}|}{\F_{n-1}}\leq c\one\{\tau\geq n\} \:\P$-f.s.\\
+$\Longrightarrow  \E{X_\tau}(\geq)=\E{X_0}$\parh
+Waldsche Gleichung: $(X_n)_{n\geq 1}$ u.i.v. Folde mit $\E{|X_1|}<\infty$, $N$ Stoppzeit bzgl. natürlicher Filtration mit $\E{N}<\infty$\\
+$\Longrightarrow \E{\sum_{j=1}^N X_j}=\E{N}\cdot\E{X_1}$
+
+\end{multicols}
+\end{document}
